@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Папирус: Древний мир</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #2b1b0e;
+            background-image: 
+                radial-gradient(circle at 10% 30%, #3f2c18 2px, transparent 2px),
+                radial-gradient(circle at 95% 70%, #5a3e22 3px, transparent 3px);
+            background-size: 50px 50px;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+        }
+
+        .papyrus {
+            background: #d9c4a0;
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(180,130,70,0.15) 0px, rgba(180,130,70,0.15) 15px, transparent 15px, transparent 30px),
+                linear-gradient(165deg, #efddc3 0%, #c9af87 100%);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.7), inset 0 -5px 15px #aa8b62, inset 0 5px 15px #f3e2c9;
+            border-radius: 50px 50px 30px 30px;
+            border: 3px solid #936e42;
+            border-top: 8px solid #b38b5b;
+            border-bottom: 8px solid #7b562e;
+            width: 100%;
+            max-width: 520px;
+            padding: 14px 10px 20px 10px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #3c280f;
+            text-align: center;
+            text-shadow: 3px 3px 0 #c9a875;
+            margin-bottom: 5px;
+        }
+        .sub-title {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #3f2d14;
+            background: #b6926c;
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 40px;
+            margin: 0 auto 12px;
+            border: 2px dashed #4d3116;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 15px;
+            background: #ac8d67;
+            padding: 8px 6px;
+            border-radius: 50px;
+        }
+        .tab-btn {
+            background: #f2dec2;
+            border: none;
+            border-radius: 40px;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #2d1b09;
+            flex: 0 1 auto;
+            box-shadow: 0 3px 0 #7d5b38;
+            cursor: pointer;
+            border: 1px solid #b1864b;
+            min-width: 55px;
+        }
+        .tab-btn.active {
+            background: #ffd78c;
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #7d5b38;
+        }
+        .panel {
+            display: none;
+            background: #ebdabc;
+            border-radius: 40px 15px 40px 15px;
+            padding: 15px 12px;
+            border: 4px double #a77741;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        .panel.active-panel {
+            display: block;
+        }
+
+        .panel h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #391f07;
+            border-bottom: 3px solid #be935b;
+            margin-bottom: 12px;
+        }
+        .panel h3 {
+            font-size: 1.2rem;
+            margin: 15px 0 6px;
+            color: #4d2f0e;
+            background: #dbbc8b;
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 30px;
+        }
+        .panel ul {
+            list-style: none;
+        }
+        .panel li {
+            margin-bottom: 6px;
+            padding-left: 22px;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        .panel li::before {
+            content: "𓏞";
+            position: absolute;
+            left: 0;
+            color: #8a4f1c;
+        }
+        .stamp {
+            background: #d3ae7a;
+            padding: 8px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 3px dotted #603e1b;
+            margin-top: 12px;
+        }
+        .date-footer {
+            background: #b48c5c;
+            border-radius: 50px;
+            padding: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin: 15px 0;
+        }
+
+        .surprise-button {
+            display: block;
+            width: 100%;
+            background: #ffb347;
+            border-radius: 50px;
+            padding: 10px 8px 6px 8px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #2d1500;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 6px 0 #9e601d;
+            border: 3px solid #ffe39c;
+            margin-top: 15px;
+            animation: blinkButton 1s infinite alternate;
+            line-height: 1.2;
+        }
+        .surprise-button small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: #3e2a0e;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+        @keyframes blinkButton {
+            0% { background: #ffb347; }
+            100% { background: #ffdd99; text-shadow: 0 0 10px red; }
+        }
+    </style>
+</head>
+<body>
+    <div class="papyrus">
+        <div class="title">𓃀 Древний мир 𓃀</div>
+        <div style="text-align: center"><span class="sub-title">✔ шпора на 5 ✔</span></div>
+
+        <audio id="tabSound" preload="auto">
+            <source src="tab-go.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="egypt">🏺 Египет</button>
+            <button class="tab-btn" data-tab="mezh">🏛 Междуречье</button>
+            <button class="tab-btn" data-tab="india">🐘 Индия</button>
+            <button class="tab-btn" data-tab="china">🐉 Китай</button>
+            <button class="tab-btn" data-tab="greece">⚡ Греция</button>
+            <button class="tab-btn" data-tab="rome">🏹 Рим</button>
+        </div>
+
+        <div class="panel active-panel" id="egypt">
+            <h2>🏺 Египет</h2>
+            <h3>👑 Фараоны</h3>
+            <ul>
+                <li><strong>Менес</strong> – объединил ~3000 до н.э.</li>
+                <li><strong>Джосер</strong> – ступенчатая пирамида</li>
+                <li><strong>Хеопс</strong> – пирамида 146 м</li>
+                <li><strong>Тутмос III</strong> – завоеватель</li>
+                <li><strong>Рамзес II</strong> – Кадеш, строитель</li>
+                <li><strong>Эхнатон</strong> – культ Атона, Нефертити</li>
+                <li><strong>Тутанхамон</strong> – гробница</li>
+                <li><strong>Клеопатра VII</strong> – последний фараон (30 до н.э.)</li>
+            </ul>
+            <h3>🙏 Боги</h3>
+            <ul><li>Амон-Ра, Анубис, Осирис, Исида, Гор</li></ul>
+            <div class="stamp">пирамиды, иероглифы, папирус</div>
+        </div>
+
+        <div class="panel" id="mezh">
+            <h2>🏛 Междуречье</h2>
+            <h3>👑 Правители</h3>
+            <ul>
+                <li><strong>Саргон</strong> – первая армия</li>
+                <li><strong>Хаммурапи</strong> – законы</li>
+                <li><strong>Навуходоносор II</strong> – сады Семирамиды</li>
+            </ul>
+            <h3>📜 Культура</h3>
+            <ul><li>клинопись, зиккураты, Гильгамеш, 60-ричная система</li></ul>
+        </div>
+
+        <div class="panel" id="india">
+            <h2>🐘 Индия</h2>
+            <h3>👑 Правители</h3>
+            <ul><li><strong>Ашока</strong> – буддизм</li></ul>
+            <h3>🏯 Общество</h3>
+            <ul><li>варны, Будда, Брахма, Вишну, Шива, цифры, шахматы</li></ul>
+        </div>
+
+        <div class="panel" id="china">
+            <h2>🐉 Китай</h2>
+            <h3>👑 Правители</h3>
+            <ul><li><strong>Цинь Шихуанди</strong> – стена, терракотовая армия</li></ul>
+            <h3>🔬 Изобретения</h3>
+            <ul><li>бумага, порох, компас, шёлк</li></ul>
+        </div>
+
+        <div class="panel" id="greece">
+            <h2>⚡ Греция</h2>
+            <h3>👑 Лидеры</h3>
+            <ul>
+                <li><strong>Солон, Перикл</strong> – Афины</li>
+                <li><strong>Леонид</strong> – 300 спартанцев</li>
+                <li><strong>Александр Македонский</strong></li>
+            </ul>
+            <h3>🏛 Боги</h3>
+            <ul><li>Зевс, Гера, Афина, Аполлон и др.</li></ul>
+            <div class="stamp">Олимпийские игры с 776 до н.э.</div>
+        </div>
+
+        <div class="panel" id="rome">
+            <h2>🏛 Рим</h2>
+            <h3>👑 Императоры</h3>
+            <ul>
+                <li><strong>Ромул</strong> – 753 до н.э.</li>
+                <li><strong>Юлий Цезарь</strong> – убит (44 до н.э.)</li>
+                <li><strong>Октавиан Август</strong> – 1-й имп.</li>
+                <li><strong>Константин</strong> – христианство</li>
+                <li><strong>Ромул Августул</strong> – 476 н.э.</li>
+            </ul>
+            <h3>⚔️ Важное</h3>
+            <ul><li>Пунические войны, Ганнибал, Спартак</li></ul>
+        </div>
+
+        <a href="https://GixEyeLAB.GitHub.io/HistoryWorld/surprize.html" class="surprise-button" target="_blank">
+            ❓ СТОП ЧТО ЭТО!?!? ❓
+            <small>ЧЭ можно нажать</small>
+        </a>
+
+        <div class="date-footer">
+            📆 753 • 490 • 44 • 30 • 476
+        </div>
+    </div>
+
+    <script>
+        const sound = document.getElementById('tabSound');
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.panel');
+
+        function playSound() {
+            if (!sound) return;
+            sound.currentTime = 0;
+            sound.play().catch(e => {});
+        }
+
+        tabs.forEach(btn => {
+            btn.addEventListener('click', function() {
+                playSound();
+                tabs.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                panels.forEach(p => p.classList.remove('active-panel'));
+                document.getElementById(this.getAttribute('data-tab')).classList.add('active-panel');
+            });
+        });
+    </script>
+</body>
+</html>
